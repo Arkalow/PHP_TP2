@@ -41,35 +41,32 @@
     </table>
     <div class="related">
         <h4><?= __('Related Showtimes') ?></h4>
-        <?php if (!empty($room->showtimes)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Movie Id') ?></th>
-                <th scope="col"><?= __('Room Id') ?></th>
-                <th scope="col"><?= __('Start') ?></th>
-                <th scope="col"><?= __('End') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($room->showtimes as $showtimes): ?>
-            <tr>
-                <td><?= h($showtimes->id) ?></td>
-                <td><?= h($showtimes->movie_id) ?></td>
-                <td><?= h($showtimes->room_id) ?></td>
-                <td><?= h($showtimes->start) ?></td>
-                <td><?= h($showtimes->end) ?></td>
-                <td><?= h($showtimes->created) ?></td>
-                <td><?= h($showtimes->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Showtimes', 'action' => 'view', $showtimes->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Showtimes', 'action' => 'edit', $showtimes->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Showtimes', 'action' => 'delete', $showtimes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $showtimes->id)]) ?>
+        <?php if (!empty($showtimes)): ?>
+            <table>
+                <tr>
+                    <th scope="col"><?= __('Lundi')?></th>
+                    <th scope="col"><?= __('Mardi')?></th>
+                    <th scope="col"><?= __('Mercredi')?></th>
+                    <th scope="col"><?= __('Jeudi')?></th>
+                    <th scope="col"><?= __('Vendredi')?></th>
+                    <th scope="col"><?= __('Samedi')?></th>
+                    <th scope="col"><?= __('Dimanche')?></th>
+                </tr>
+                <tr>
+                <?php for ($i=$numJour; $i < $numJour+7; $i++){ ?>
+                <td>
+                    <?php foreach ($showtimes as $showtime): ?>
+                         <?php if ($showtime->start->day === $i): ?>
+                            <ul>  
+                                <li><?= h($showtime->movie->name); ?></li>
+                                <li><?= h($showtime->movie->releaseDate); ?></li>
+                            </ul>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
+                <?php } ?>
+                </tr>
+            </table>
         <?php endif; ?>
     </div>
 </div>
