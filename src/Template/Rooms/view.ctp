@@ -53,18 +53,21 @@
                     <th scope="col"><?= __('Dimanche')?></th>
                 </tr>
                 <tr>
-                <?php for ($i=$numJour; $i < $numJour+7; $i++){ ?>
+                <?php for ($i=$numJour; $i < $numJour+7; $i++) :  ?>
                 <td>
                     <?php foreach ($showtimes as $showtime): ?>
                          <?php if ($showtime->start->day === $i): ?>
                             <ul>  
-                                <li><?= h($showtime->movie->name); ?></li>
-                                <li><?= h($showtime->movie->releaseDate); ?></li>
+                                <li><?= h($showtime->movie->name) ?></li>
+                                <li>
+                                    <?= h($showtime->start->hour . "/") ?>
+                                    <?= h($showtime->end->hour . "h") ?>
+                                </li>
                             </ul>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </td>
-                <?php } ?>
+                <?php endfor; ?>
                 </tr>
             </table>
         <?php endif; ?>
